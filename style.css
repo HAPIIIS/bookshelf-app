@@ -1,0 +1,307 @@
+:root {
+    --primary-color: #519872;
+    --primary-hover: #34252F;
+    --background-color: #BEC5AD;
+    --star-color: #ffc107;
+    --star-background: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+  
+body {
+    background-color: var(--background-color);
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem;
+    text-align: left;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+section {
+    background: rgb(241, 241, 241);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+}
+  
+form > div:has(#bookFormIsComplete) {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+label {
+    display: block;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+#bookFormIsComplete + label,
+label[for="bookFormIsComplete"] {
+    margin-bottom: 0;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input[type="checkbox"] {
+    margin-top: 0.5rem;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+#searchBook {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+#searchBook input {
+    flex: 1;
+}
+
+#searchBook button {
+    min-width: 100px;
+}
+
+.book-list {
+    display: grid;
+    gap: 1rem;
+}
+
+[data-testid="bookItem"] {
+    background-color: #3B5249;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+[data-testid="bookItem"] h3 {
+    color: #BEC5AD;
+    margin-bottom: 0.5rem;
+}
+
+[data-testid="bookItem"] p {
+    color: #BEC5AD;
+    margin-bottom: 0.25rem;
+}
+
+[data-testid="bookItem"] div {
+    display: flex;
+    gap: 0.5rem;
+}   
+
+[data-testid="bookItemDeleteButton"] {
+    background-color: #dc3545;
+}
+
+[data-testid="bookItemDeleteButton"]:hover {
+    background-color: #c82333;
+}
+
+[data-testid="bookItemEditButton"] {
+    background-color: #ffc107;
+    color: #000;
+}
+
+[data-testid="bookItemEditButton"]:hover {
+    background-color: #e0a800;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    transform: rotateY(180deg);
+}
+
+.container .container__items {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.container .container__items input {
+    display: none;
+}
+
+.container .container__items label {
+    width: 24px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    margin: 0;
+}
+
+.container .container__items label .star-stroke {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--star-background);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    transition: background-color 0.2s;
+}
+
+.container .container__items label .star-stroke .star-fill {
+    width: 70%;
+    aspect-ratio: 1;
+    background: #519872;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    transition: background-color 0.2s;
+}
+
+.container .container__items input:hover ~ label .star-stroke,
+.container .container__items input:checked ~ label .star-stroke {
+    background: var(--star-color);
+}
+
+.container .container__items input:checked ~ label .star-stroke .star-fill {
+    background: var(--star-color);
+}
+
+.container .container__items label:hover .label-description::after {
+    content: attr(data-content);
+    position: absolute;
+    left: 0;
+    margin-top: 1em;
+    color: #666;
+    text-align: left;
+    font-size: 0.875rem;
+    transform: rotateY(180deg);
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 1rem;
+    }
+
+    #searchBook {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #searchBook button {
+        width: 100%;
+    }
+
+    [data-testid="bookItem"] div {
+        flex-direction: column;
+    }
+    
+    .container .container__items {
+        justify-content: center;
+    }
+    
+    .container .container__items label {
+        width: 32px;
+    }
+}
+
+.stars-display {
+    transform: rotateY(180deg);
+    margin: 10px 0;
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.stars-display .container__items {
+    justify-content: flex-start !important;
+    padding: 5px 0;
+    margin-left: 0;  
+    width: auto;     
+    gap: 4px;
+}
+
+.stars-display .star {
+    width: 24px;
+    aspect-ratio: 1;
+    cursor: default;
+    margin-right: 0;
+}
+
+.stars-display .star .star-stroke {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--star-background);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.stars-display .star.active .star-stroke {
+    background: var(--star-color);
+}
+
+.stars-display .star.active .star-stroke .star-fill {
+    background: var(--star-color);
+}
+
+.stars-display .star .star-stroke .star-fill {
+    width: 70%;
+    aspect-ratio: 1;
+    background: var(--star-background);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+[data-testid="bookItem"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+[data-testid="bookItem"] > div:not(:last-child) {
+    width: 100%;
+}
